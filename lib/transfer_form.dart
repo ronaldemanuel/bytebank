@@ -1,7 +1,10 @@
+import 'package:bytebank/transfer_list.dart';
 import 'package:flutter/material.dart';
 
 class TransferForm extends StatelessWidget {
-  const TransferForm({Key? key}) : super(key: key);
+  final TextEditingController _accountNumberController =
+      TextEditingController();
+  final TextEditingController _valueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +19,7 @@ class TransferForm extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: TextField(
+              controller: _accountNumberController,
               style: TextStyle(
                 fontSize: 24,
               ),
@@ -30,6 +34,7 @@ class TransferForm extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: TextField(
+              controller: _valueController,
               style: TextStyle(
                 fontSize: 24,
               ),
@@ -42,7 +47,16 @@ class TransferForm extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              final int? accountNumber =
+                  int.tryParse(_accountNumberController.text);
+              final double? value = double.tryParse(_valueController.text);
+
+              if (accountNumber != null && value != null) {
+                final createdTransfer = Transfer(value, accountNumber);
+                debugPrint(createdTransfer.toString());
+              }
+            },
             child: Text('Confirmar'),
           ),
         ],
