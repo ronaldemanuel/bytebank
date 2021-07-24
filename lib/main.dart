@@ -12,7 +12,7 @@ class ByteBankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TransferForm(),
+      home: TransferList(),
       debugShowCheckedModeBanner: false,
     );
   }

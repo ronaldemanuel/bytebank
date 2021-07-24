@@ -27,7 +27,7 @@ class TransferForm extends StatelessWidget {
             icon: Icons.monetization_on,
           ),
           ElevatedButton(
-            onPressed: () => _createTrasnfer(),
+            onPressed: () => _createTrasnfer(context),
             child: Text('Confirmar'),
           ),
         ],
@@ -35,13 +35,13 @@ class TransferForm extends StatelessWidget {
     );
   }
 
-  void _createTrasnfer() {
+  void _createTrasnfer(BuildContext context) {
     final int? accountNumber = int.tryParse(_accountNumberController.text);
     final double? value = double.tryParse(_valueController.text);
 
     if (accountNumber != null && value != null) {
       final createdTransfer = Transfer(value, accountNumber);
-      debugPrint('foi');
+      Navigator.pop(context, createdTransfer);
     }
   }
 }
