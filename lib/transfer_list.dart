@@ -13,7 +13,6 @@ class _TransferListState extends State<TransferList> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Transferências'),
-        backgroundColor: Colors.green,
       ),
       body: ListView.builder(
         itemCount: _transfers.length,
@@ -31,18 +30,14 @@ class _TransferListState extends State<TransferList> {
             },
           ));
           future.then((transferRecived) {
-            debugPrint('$transferRecived');
             if (transferRecived != null) {
               setState(() {
                 _transfers.add(transferRecived);
               });
             }
-            debugPrint('${_transfers.length}');
-            debugPrint('${_transfers[0]}');
           });
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.green,
       ),
     );
   }

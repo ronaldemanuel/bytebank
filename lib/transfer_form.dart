@@ -18,7 +18,6 @@ class _TransferFormState extends State<TransferForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Criando Transferência'),
-        backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         child: Column(
