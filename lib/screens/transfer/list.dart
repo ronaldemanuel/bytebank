@@ -1,45 +1,49 @@
-import 'package:bytebank/transfer_form.dart';
+import 'package:bytebank/models/transfer.dart';
+import 'package:bytebank/screens/transfer/form.dart';
 import 'package:flutter/material.dart';
 
+// App bar title
+const _appBarTitle = 'Transferências';
+
 class TransferList extends StatefulWidget {
+  final List<Transfer> _transfers = [];
+
   @override
   _TransferListState createState() => _TransferListState();
 }
 
 class _TransferListState extends State<TransferList> {
-  final List<Transfer> _transfers = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transferências'),
+        title: Text(_appBarTitle),
       ),
       body: ListView.builder(
-        itemCount: _transfers.length,
+        itemCount: widget._transfers.length,
         itemBuilder: (context, index) {
-          final Transfer transfer = _transfers[index];
+          final Transfer transfer = widget._transfers[index];
           return TransferItem(transfer);
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final Future<Transfer?> future =
-              Navigator.push(context, MaterialPageRoute(
-            builder: (context) {
-              return TransferForm();
-            },
-          ));
-          future.then((transferRecived) {
-            if (transferRecived != null) {
-              setState(() {
-                _transfers.add(transferRecived);
-              });
-            }
-          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TransferForm(),
+            ),
+          ).then((transferRecived) => _update(transferRecived));
         },
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void _update(transferRecived) {
+    if (transferRecived != null) {
+      setState(() => widget._transfers.add(transferRecived));
+    }
   }
 }
 
@@ -57,17 +61,5 @@ class TransferItem extends StatelessWidget {
         subtitle: Text(_transfer.accountNumber.toString()),
       ),
     );
-  }
-}
-
-class Transfer {
-  final double value;
-  final int accountNumber;
-
-  Transfer(this.value, this.accountNumber);
-
-  @override
-  String toString() {
-    return 'Transfer{value: $value, accountNumber: $accountNumber}';
   }
 }

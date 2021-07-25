@@ -1,5 +1,20 @@
-import 'package:bytebank/transfer_list.dart';
+import 'package:bytebank/components/editor.dart';
+import 'package:bytebank/models/transfer.dart';
 import 'package:flutter/material.dart';
+
+// App bar title
+const _appBarTitle = 'Criando Transferência';
+
+// Account number constants
+const _fieldLabelAccountNumber = 'Número da conta';
+const _fieldTipAccountNumber = '0000';
+
+// Value constants
+const _fieldLabelValue = 'Valor';
+const _fieldTipValue = '0.00';
+
+// Confirm button text
+const _confirmButtonText = 'Confirmar';
 
 class TransferForm extends StatefulWidget {
   const TransferForm({Key? key}) : super(key: key);
@@ -17,25 +32,25 @@ class _TransferFormState extends State<TransferForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Criando Transferência'),
+        title: Text(_appBarTitle),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Editor(
               controller: _accountNumberController,
-              label: 'Número da conta',
-              tip: '0000',
+              label: _fieldLabelAccountNumber,
+              tip: _fieldTipAccountNumber,
             ),
             Editor(
               controller: _valueController,
-              label: 'Valor',
-              tip: '0.00',
+              label: _fieldLabelValue,
+              tip: _fieldTipValue,
               icon: Icons.monetization_on,
             ),
             ElevatedButton(
               onPressed: () => _createTrasnfer(context),
-              child: Text('Confirmar'),
+              child: Text(_confirmButtonText),
             ),
           ],
         ),
@@ -51,33 +66,5 @@ class _TransferFormState extends State<TransferForm> {
       final createdTransfer = Transfer(value, accountNumber);
       Navigator.pop(context, createdTransfer);
     }
-  }
-}
-
-class Editor extends StatelessWidget {
-  final TextEditingController? controller;
-  final String? label;
-  final String? tip;
-  final IconData? icon;
-
-  Editor({this.controller, this.label, this.tip, this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: TextField(
-        controller: controller,
-        style: TextStyle(
-          fontSize: 24,
-        ),
-        decoration: InputDecoration(
-          icon: icon != null ? Icon(icon) : null,
-          labelText: label,
-          hintText: tip,
-        ),
-        keyboardType: TextInputType.number,
-      ),
-    );
   }
 }

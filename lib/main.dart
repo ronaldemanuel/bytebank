@@ -1,5 +1,5 @@
+import 'package:bytebank/screens/transfer/list.dart';
 import 'package:flutter/material.dart';
-import 'transfer_list.dart';
 
 void main() {
   runApp(ByteBankApp());
