@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'transfer_list.dart';
-import 'transfer_form.dart';
 
 void main() {
   runApp(ByteBankApp());
@@ -12,6 +11,7 @@ class ByteBankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'ByteBank',
       home: TransferList(),
       debugShowCheckedModeBanner: false,
     );

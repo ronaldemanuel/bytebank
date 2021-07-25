@@ -1,7 +1,14 @@
 import 'package:bytebank/transfer_list.dart';
 import 'package:flutter/material.dart';
 
-class TransferForm extends StatelessWidget {
+class TransferForm extends StatefulWidget {
+  const TransferForm({Key? key}) : super(key: key);
+
+  @override
+  _TransferFormState createState() => _TransferFormState();
+}
+
+class _TransferFormState extends State<TransferForm> {
   final TextEditingController _accountNumberController =
       TextEditingController();
   final TextEditingController _valueController = TextEditingController();
@@ -13,24 +20,26 @@ class TransferForm extends StatelessWidget {
         title: Text('Criando Transferência'),
         backgroundColor: Colors.green,
       ),
-      body: Column(
-        children: [
-          Editor(
-            controller: _accountNumberController,
-            label: 'Número da conta',
-            tip: '0000',
-          ),
-          Editor(
-            controller: _valueController,
-            label: 'Valor',
-            tip: '0.00',
-            icon: Icons.monetization_on,
-          ),
-          ElevatedButton(
-            onPressed: () => _createTrasnfer(context),
-            child: Text('Confirmar'),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Editor(
+              controller: _accountNumberController,
+              label: 'Número da conta',
+              tip: '0000',
+            ),
+            Editor(
+              controller: _valueController,
+              label: 'Valor',
+              tip: '0.00',
+              icon: Icons.monetization_on,
+            ),
+            ElevatedButton(
+              onPressed: () => _createTrasnfer(context),
+              child: Text('Confirmar'),
+            ),
+          ],
+        ),
       ),
     );
   }

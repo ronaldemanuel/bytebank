@@ -1,14 +1,15 @@
 import 'package:bytebank/transfer_form.dart';
 import 'package:flutter/material.dart';
 
-class TransferList extends StatelessWidget {
-  final List<Transfer> _transfers = [];
+class TransferList extends StatefulWidget {
+  @override
+  _TransferListState createState() => _TransferListState();
+}
 
+class _TransferListState extends State<TransferList> {
+  final List<Transfer> _transfers = [];
   @override
   Widget build(BuildContext context) {
-    _transfers.add(Transfer(200, 1000));
-    _transfers.add(Transfer(200, 1000));
-    _transfers.add(Transfer(200, 1000));
     return Scaffold(
       appBar: AppBar(
         title: Text('Transferências'),
@@ -23,21 +24,28 @@ class TransferList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final Future future = Navigator.push(context, MaterialPageRoute(
+          final Future<Transfer?> future =
+              Navigator.push(context, MaterialPageRoute(
             builder: (context) {
               return TransferForm();
             },
           ));
           future.then((transferRecived) {
             debugPrint('$transferRecived');
-            _transfers.add(transferRecived);
+            if (transferRecived != null) {
+              setState(() {
+                _transfers.add(transferRecived);
+              });
+            }
+            debugPrint('${_transfers.length}');
+            debugPrint('${_transfers[0]}');
           });
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
       ),
     );
-  } // O conteúdo do widget é imutável
+  }
 }
 
 class TransferItem extends StatelessWidget {
