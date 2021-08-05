@@ -9,6 +9,10 @@ const _appBarTitle = 'Criando Transferência';
 const _fieldLabelAccountNumber = 'Número da conta';
 const _fieldTipAccountNumber = '0000';
 
+// Agency number constants
+const _fieldlLabelAgencyNumber = 'Número da agência';
+const _fieldTipAgencyNumber = '0000';
+
 // Value constants
 const _fieldLabelValue = 'Valor';
 const _fieldTipValue = '0.00';
@@ -26,6 +30,7 @@ class TransferForm extends StatefulWidget {
 class _TransferFormState extends State<TransferForm> {
   final TextEditingController _accountNumberController =
       TextEditingController();
+  final TextEditingController _agencyNumberController = TextEditingController();
   final TextEditingController _valueController = TextEditingController();
 
   @override
@@ -41,6 +46,11 @@ class _TransferFormState extends State<TransferForm> {
               controller: _accountNumberController,
               label: _fieldLabelAccountNumber,
               tip: _fieldTipAccountNumber,
+            ),
+            Editor(
+              controller: _agencyNumberController,
+              label: _fieldlLabelAgencyNumber,
+              tip: _fieldTipAgencyNumber,
             ),
             Editor(
               controller: _valueController,
